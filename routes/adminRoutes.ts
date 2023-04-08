@@ -1,22 +1,9 @@
-const express = require('express');
-const app = express();
+var express = require('express');
+const router = express.Router();
 
-const AdminModel = require('./models/Admin');
+const AdminModel = require('../models/Admin');
 
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-);
-
-app.use(express.json());
-
-app.get('/', (req: any, res: any) => {
-
-    res.json({message: "Hello, World!"})
-});
-
-app.post('/auth/login', async (req: any, res: any) => {
+router.post('/auth/login', async (req: any, res: any) => {
 
     const {email, password} = req.body;
 
@@ -42,6 +29,4 @@ app.post('/auth/login', async (req: any, res: any) => {
     }
 });
 
-app.get('/category', (req: any, res: any) => {
-
-})
+module.exports = router;
