@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+const mongo = require('mongoose');
+
+const AdminModel = require('./models/Admin');
 
 app.use(
     express.urlencoded({
-        extender: true,
+        extended: true,
     }),
 );
 
@@ -16,11 +18,24 @@ app.get('/', (req: any, res: any) => {
     res.json({message: "Hello, World!"})
 });
 
-app.post('/auth/login', (req: any, res: any) => {
+app.post('/auth/login', async (req: any, res: any) => {
 
+    const {email, password} = req.body;
+    const admin = {
+        email,
+        password
+    }
+
+    try{
+        await AdminModel.create(admin);
+        res.status(201)
+    }
+    catch(error: any) {
+        res.status(500).json(error);
+    }
 });
 
-mongoose.connect('mongodb+srv://jmgrd98:ilovecode98@apicluster0.y7vkluv.mongodb.net/?retryWrites=true&w=majority')
+mongo.connect('mongodb+srv://jmgrd98:ilovecode98@apicluster0.y7vkluv.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
         console.log('API conectada no MongoDB');
         app.listen(3000);
