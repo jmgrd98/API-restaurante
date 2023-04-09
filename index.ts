@@ -18,7 +18,7 @@ app.use(
 app.use(express.json());
 
 const adminRoutes = require('./routes/adminRoutes');
-app.use('/admin', adminRoutes);
+app.use('/auth', adminRoutes);
 
 app.get('/category', (req: any, res: any) => {
 

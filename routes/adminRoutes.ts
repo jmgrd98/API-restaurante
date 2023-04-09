@@ -10,7 +10,7 @@ const AdminModel = require('../models/Admin');
 //     return admins;
 // })
 
-router.post('/auth/register', async (req: any, res: any) => {
+router.post('/register', async (req: any, res: any) => {
 
     const {email, password} = req.body;
 
@@ -52,7 +52,7 @@ router.post('/auth/register', async (req: any, res: any) => {
     }
 });
 
-router.post('/auth/login', async (req: any, res: any) => {
+router.post('/login', async (req: any, res: any) => {
 
     const {email, password} = req.body;
 

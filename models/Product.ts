@@ -3,7 +3,7 @@ const Category = require('./Category')
 
 const Product = mongoose.model('Product', {
     id: String,
-    categories: Category[],
+    categories: [Category],
     name: String,
     qty: Number,
     price: Number
