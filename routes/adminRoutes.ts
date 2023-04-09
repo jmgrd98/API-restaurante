@@ -5,8 +5,17 @@ const jwt = require('jsonwebtoken');
 
 const AdminModel = require('../models/Admin');
 
-adminRouter.get('', (req: any, res: any) => {
-    res.send('Hello!');
+adminRouter.get('/:id', (req: any, res: any) => {
+    
+    const id = req.params.id;
+    const admin = AdminModel.findById(id);
+
+    if(!admin) {
+        return res.status (404).json({error: "Administrador não encontrado!"})
+    }
+
+    res.status(200).json({message: 'Administrador encontrado com sucesso!', admin})
+
 })
 
 adminRouter.post('/register', async (req: any, res: any) => {
