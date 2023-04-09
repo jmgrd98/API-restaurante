@@ -1,7 +1,7 @@
 const mong = require('mongoose');
 
 const Admin = mong.model('Admin', {
-    id: Number,
+    id: String,
     email: String,
     password: String,
     // createdAt: new Date()

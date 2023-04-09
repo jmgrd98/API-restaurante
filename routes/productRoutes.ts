@@ -6,25 +6,40 @@ const productRouter = express.Router();
 const ProductModel = require('../models/Product');
 
 productRouter.get('', (req: any, res: any) => {
-
+    
+        ProductModel.find()
+            .then((products: any) => {
+                res.status(200).json(products);
+            })
+            .catch((error: any) => {
+                res.status(500).json({error: error});
+            })
 });
 
 productRouter.get('/:id', (req: any, res: any) => {
-
+    
+        const id = req.params.id;
+    
+        ProductModel.findById(id)
+            .then((product: any) => {
+                res.status(200).json(product);
+            })
+            .catch((error: any) => {
+                res.status(500).json({error: error});
+            })
 });
 
 productRouter.post('', async (req: any, res: any) => {
 
-    const {name, qty, number, price} = req.body;
+    const {name, qty, price} = req.body;
 
-    if(!name || !qty || !number || !price) {
+    if(!name || !qty || !price) {
         res.status(422).json({error: "Todos os campos são obrigatórios!"});
     }
 
     const product = new ProductModel({
         name,
         qty,
-        number,
         price
     })
 
@@ -38,8 +53,22 @@ productRouter.post('', async (req: any, res: any) => {
 
 });
 
-productRouter.patch('/:id', (req: any, res: any) => {
+productRouter.patch('/:id', async (req: any, res: any) => {
 
+    const id = req.params.id;
+    const {name, qty, price} = req.body;
+
+    if(!name || !qty || !price) {
+        res.status(422).json({error: "Todos os campos são obrigatórios!"});
+    }
+
+    try {
+        
+        await ProductModel.updated(name, qty, price);
+        res.status(201).json({message: 'Product updated on database!'})
+    } catch (error: any) {
+        res.status(500).json({error: error});
+    }
 });
 
 productRouter.delete('/:id', (req: any, res: any) => {
