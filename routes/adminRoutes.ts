@@ -20,12 +20,12 @@ router.post('/auth/register', async (req: any, res: any) => {
     };
 
     if(!isValidEmail(email)) {
-        res.status(400).json({ error: 'Invalid email format' });
+        res.status(400).json({ error: 'Formato de email inválido!' });
         return;
     }
 
     if (!isValidPassword(password)) {
-        res.status(400).json({ error: 'Password should be at least 8 characters long' });
+        res.status(400).json({ error: 'Senha deve ter no mínimo 8 caracteres!' });
         return;
     }
 
@@ -37,6 +37,7 @@ router.post('/auth/register', async (req: any, res: any) => {
 
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(password, salt);
+
 
     const admin = new AdminModel({
         email,
@@ -52,15 +53,20 @@ router.post('/auth/register', async (req: any, res: any) => {
     }
 });
 
-router.post('/auth/login', (req: any, res: any) => {
+router.post('/auth/login', async (req: any, res: any) => {
 
+    const {email, password} = req.body;
+
+    if(!email || !password) {
+        res.status(422).json({error: "Email e senha são obrigatórios!"})
+    };
 });
 
-function isValidEmail(email) {
+function isValidEmail(email:string) {
     return true;
 }
 
-function isValidPassword(password) {
+function isValidPassword(password:string) {
     return password.length > 8;
 }
 
