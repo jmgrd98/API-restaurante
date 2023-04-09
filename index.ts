@@ -18,11 +18,12 @@ app.use(
 app.use(express.json());
 
 const adminRoutes = require('./routes/adminRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
+
 app.use('/auth', adminRoutes);
-
-app.get('/category', (req: any, res: any) => {
-
-})
+app.use('/category', categoryRoutes);
+app.use('/product', productRoutes);
 
 mongo.connect(`mongodb+srv://${dbUser}:${dbPassword}@apicluster0.y7vkluv.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
