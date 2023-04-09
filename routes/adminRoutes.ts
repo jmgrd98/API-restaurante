@@ -1,20 +1,33 @@
+import * as mongoose from "mongoose";
+
 var express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
 const AdminModel = require('../models/Admin');
 
-router.post('/auth/login', async (req: any, res: any) => {
+// router.get('/auth/login', (req: any, res: any) => {
+//     const admins =
+//     return admins;
+// })
+
+router.post('/auth/register', async (req: any, res: any) => {
 
     const {email, password} = req.body;
 
-    if(!email) {
-        res.status(422).json({error: "Email é obrigatório!"})
+    if(!email || !password) {
+        res.status(422).json({error: "Email e senha são obrigatórios!"})
     };
 
-    if(!password) {
-        res.status(422).json({error: "Senha é obrigatória!"})
-    };
+    if(!isValidEmail(email)) {
+        res.status(400).json({ error: 'Invalid email format' });
+        return;
+    }
+
+    if (!isValidPassword(password)) {
+        res.status(400).json({ error: 'Password should be at least 8 characters long' });
+        return;
+    }
 
     const adminExists = await AdminModel.findOne({email: email});
 
@@ -38,5 +51,17 @@ router.post('/auth/login', async (req: any, res: any) => {
         res.status(500).json({error: error});
     }
 });
+
+router.post('/auth/login', (req: any, res: any) => {
+
+});
+
+function isValidEmail(email) {
+    return true;
+}
+
+function isValidPassword(password) {
+    return password.length > 8;
+}
 
 module.exports = router;
