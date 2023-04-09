@@ -1,7 +1,9 @@
 var express = require('express');
-const router = express.Router();
-const category = require('../models/Category')
+const categoryRouter = express.Router();
+var category = require('../models/Category')
 
-router.get('/', (req: any, res: any) => {
-    return category.find();
+categoryRouter.get('/', (req: any, res: any) => {
+    return [category];
 })
+
+module.exports = categoryRouter;

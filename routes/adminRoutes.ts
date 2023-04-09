@@ -1,16 +1,15 @@
 var express = require('express');
-const router = express.Router();
+const adminRouter = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const AdminModel = require('../models/Admin');
 
-// router.get('/auth/login', (req: any, res: any) => {
-//     const admins =
-//     return admins;
-// })
+adminRouter.get('', (req: any, res: any) => {
+    res.send('Hello!');
+})
 
-router.post('/register', async (req: any, res: any) => {
+adminRouter.post('/register', async (req: any, res: any) => {
 
     const {email, password} = req.body;
 
@@ -52,7 +51,7 @@ router.post('/register', async (req: any, res: any) => {
     }
 });
 
-router.post('/login', async (req: any, res: any) => {
+adminRouter.post('/login', async (req: any, res: any) => {
 
     const {email, password} = req.body;
 
@@ -95,4 +94,4 @@ function isValidPassword(password:string) {
     return password.length > 8;
 }
 
-module.exports = router;
+module.exports = adminRouter;

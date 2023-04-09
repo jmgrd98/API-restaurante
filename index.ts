@@ -2,8 +2,6 @@ var express = require('express');
 const app = express();
 const mongo = require('mongoose');
 import * as dotenv from 'dotenv';
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 dotenv.config();
 const dbUser = process.env.DB_USER;

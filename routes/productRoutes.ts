@@ -1,23 +1,30 @@
 var express = require('express');
-const router = express.Router();
-const category = require('../models/Category')
+const productRouter = express.Router();
+var category = require('../models/Category')
 
-router.get('/product', (req: any, res: any) => {
-
-});
-
-router.get('/product/:id', (req: any, res: any) => {
+productRouter.get('', (req: any, res: any) => {
 
 });
 
-router.post('/product/', (req: any, res: any) => {
+productRouter.get('/:id', (req: any, res: any) => {
 
 });
 
-router.patch('/product/:id', (req: any, res: any) => {
+productRouter.post('', (req: any, res: any) => {
+
+    const {categories, name, qty, number, price} = req.body;
+
+    if(!name || !qty || !number || !price) {
+        res.status(422).json({error: "Todos os campos são obrigatórios!"});
+    }
+});
+
+productRouter.patch('/:id', (req: any, res: any) => {
 
 });
 
-router.delete('/product/:id', (req: any, res: any) => {
+productRouter.delete('/:id', (req: any, res: any) => {
 
 });
+
+module.exports = productRouter;

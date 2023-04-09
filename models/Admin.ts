@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+const mong = require('mongoose');
 
-const Admin = mongoose.model('Admin', {
+const Admin = mong.model('Admin', {
     email: String,
     password: String,
+    // createdAt: new Date()
 });
 
 module.exports = Admin;
