@@ -1,8 +1,7 @@
-import * as mongoose from "mongoose";
-
 var express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const AdminModel = require('../models/Admin');
 
@@ -60,6 +59,32 @@ router.post('/auth/login', async (req: any, res: any) => {
     if(!email || !password) {
         res.status(422).json({error: "Email e senha são obrigatórios!"})
     };
+
+    const admin = await AdminModel.findOne({email: email});
+
+    if(!admin) {
+        res.status(404).json({error: "Administrador não encontrado!"})
+    }
+
+    const checkPassword = await bcrypt.compare(password, admin.password);
+
+    if(!checkPassword) {
+        res.status(422).json({error: "Senha inválida!"})
+    }
+
+    try {
+        const secret = process.env.SECRET;
+        const token = jwt.sign(
+            {
+                id: admin._id,
+            },
+            secret,
+        )
+        res.status(200).json({message: 'Autenticação realizada com sucesso', token})
+
+    } catch (error){
+        console.error(error);
+    }
 });
 
 function isValidEmail(email:string) {
