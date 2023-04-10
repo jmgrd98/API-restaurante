@@ -17,15 +17,15 @@ app.use(
 
 app.use(express.json());
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
-
-const adminRoutes = require('./routes/adminRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const productRoutes = require('./routes/productRoutes');
+const adminRoutes = require('./src/routes/adminRoutes');
+const categoryRoutes = require('./src/routes/categoryRoutes');
+const productRoutes = require('./src/routes/productRoutes');
 
 app.use('/auth', adminRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
 
 mongo.connect(`mongodb+srv://${dbUser}:${dbPassword}@apicluster0.y7vkluv.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
