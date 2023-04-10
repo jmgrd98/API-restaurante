@@ -102,6 +102,11 @@
                 "tags": [
                     "Admin"
                 ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -435,11 +440,6 @@
         {
             "url": "http://localhost:3000",
             "description": "Development server"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Model"
         }
     ],
     "externalDocs": {
