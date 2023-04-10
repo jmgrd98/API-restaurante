@@ -1,6 +1,8 @@
 var express = require('express');
 const app = express();
 const mongo = require('mongoose');
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocs from './swagger.json';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,6 +16,8 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
 
 const adminRoutes = require('./routes/adminRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
