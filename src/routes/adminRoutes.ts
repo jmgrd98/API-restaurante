@@ -102,7 +102,7 @@ function isValidPassword(password:string) {
     return password.length > 8;
 }
 
-adminRouter.patch('/:id', async (req: any, res: any) => {
+adminRouter.patch('/admin/:id', async (req: any, res: any) => {
 
     const id = req.params.id;
     const {email, password} = req.body;
@@ -122,7 +122,7 @@ adminRouter.patch('/:id', async (req: any, res: any) => {
     }
 });
 
-adminRouter.delete('/:id', async (req: any, res: any) => {
+adminRouter.delete('/admin/:id', async (req: any, res: any) => {
 
     const id = req.params.id;
 
