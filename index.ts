@@ -1,9 +1,12 @@
 var express = require('express');
 const app = express();
 const mongo = require('mongoose');
+const cors = require('cors');
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './swagger.json';
 import * as dotenv from 'dotenv';
+
+app.use(cors());
 
 dotenv.config();
 const dbUser = process.env.DB_USER;
