@@ -4,7 +4,7 @@ export const Category = mongolose.model('Category', {
     id: String,
     parent: String,
     name: String,
-    // createdAt: new Date()
+    createdAt: Date,
 });
 
 module.exports = Category;

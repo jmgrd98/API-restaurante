@@ -4,7 +4,7 @@ const Admin = mong.model('Admin', {
     id: String,
     email: String,
     password: String,
-    // createdAt: new Date()
+    createdAt: Date,
 });
 
 module.exports = Admin;

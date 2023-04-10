@@ -1,13 +1,13 @@
 const momo = require('mongoose');
-// const Category = require('./Category')
+const Category = require('./Category')
 
 const Product = momo.model('Product', {
     id: String,
-    // categories: [Category.schema],
+    categories: [Category.schema],
     name: String,
     qty: Number,
     price: Number,
-    // createdAt: new Date()
+    createdAt: Date,
 });
 
 module.exports = Product;
