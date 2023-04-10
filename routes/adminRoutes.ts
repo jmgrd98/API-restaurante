@@ -5,16 +5,15 @@ const jwt = require('jsonwebtoken');
 
 const AdminModel = require('../models/Admin');
 
-adminRouter.get('/:id', (req: any, res: any) => {
+adminRouter.get('', (req: any, res: any) => {
     
-    const id = req.params.id;
-    const admin = AdminModel.findById(id);
-
-    if(!admin) {
-        return res.status (404).json({error: "Administrador não encontrado!"})
-    }
-
-    res.status(200).json({message: 'Administrador encontrado com sucesso!', admin})
+    AdminModel.find()
+            .then((admins: any) => {
+                res.status(200).json(admins);
+            })
+            .catch((error: any) => {
+                res.status(500).json({error: error});
+            })
 
 })
 
@@ -102,5 +101,38 @@ function isValidEmail(email:string) {
 function isValidPassword(password:string) {
     return password.length > 8;
 }
+
+adminRouter.patch('/:id', async (req: any, res: any) => {
+
+    const id = req.params.id;
+    const {email, password} = req.body;
+
+    const admin = new AdminModel({
+        _id: id,
+        email,
+        password
+    });
+
+    try {
+        await AdminModel.updateOne({_id: id}, admin);
+        res.status(201).json({message: 'Admin updated on database!'})
+    }
+    catch (error: any) {
+        res.status(500).json({error: error});
+    }
+});
+
+adminRouter.delete('/:id', async (req: any, res: any) => {
+
+    const id = req.params.id;
+
+    try {
+        await AdminModel.deleteOne({_id: id});
+        res.status(201).json({message: 'Admin deleted on database!'})
+    }
+    catch (error: any) {
+        res.status(500).json({error: error});
+    }
+});
 
 module.exports = adminRouter;
