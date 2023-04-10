@@ -13,6 +13,9 @@
             "get": {
                 "summary": "Get all admins",
                 "operationId": "getAllAdmins",
+                "tags": [
+                    "Admin"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -34,6 +37,9 @@
             "get": {
                 "summary": "Get admin by id",
                 "operationId": "getById",
+                "tags": [
+                    "Admin"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -63,6 +69,9 @@
             "post": {
                 "summary": "Register admin",
                 "operationId": "create",
+                "tags": [
+                    "Admin"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -88,8 +97,11 @@
         },
         "/auth/login": {
             "post": {
-                "summary": "Register admin",
+                "summary": "Login admin",
                 "operationId": "create",
+                "tags": [
+                    "Admin"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -115,8 +127,11 @@
         },
         "/admin/:id": {
             "put": {
-                "summary": "Update",
+                "summary": "Update admin",
                 "operationId": "update",
+                "tags": [
+                    "Admin"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -153,8 +168,11 @@
         },
         "/admin/{id}": {
             "delete": {
-                "summary": "Delete",
+                "summary": "Delete admin",
                 "operationId": "delete",
+                "tags": [
+                    "Admin"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -184,6 +202,9 @@
             "get": {
                 "summary": "Get all categories",
                 "operationId": "getAllCategories",
+                "tags": [
+                    "Category"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -205,6 +226,9 @@
             "get": {
                 "summary": "Get all products",
                 "operationId": "getAllProducts",
+                "tags": [
+                    "Product"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -226,6 +250,9 @@
             "get": {
                 "summary": "Get product by id",
                 "operationId": "getById",
+                "tags": [
+                    "Product"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -255,6 +282,9 @@
             "post": {
                 "summary": "Create product",
                 "operationId": "create",
+                "tags": [
+                    "Product"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -280,8 +310,11 @@
         },
         "/product/:id": {
             "put": {
-                "summary": "Update",
+                "summary": "Update product",
                 "operationId": "update",
+                "tags": [
+                    "Product"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -318,8 +351,11 @@
         },
         "/product/{id}": {
             "delete": {
-                "summary": "Delete",
+                "summary": "Delete product",
                 "operationId": "delete",
+                "tags": [
+                    "Product"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -385,6 +421,13 @@
                         "$ref": "#/components/schemas/Category"
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     },
