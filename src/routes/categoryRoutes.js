@@ -1,4 +1,3 @@
-import { Category } from '../models/Category';
 var express = require('express');
 const categoryRouter = express.Router();
 // const CategoryModel = require('../models/Category');
