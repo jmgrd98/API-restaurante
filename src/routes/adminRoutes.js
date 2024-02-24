@@ -1,23 +1,23 @@
 var express = require('express');
 const adminRouter = express.Router();
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const AdminModel = require('../models/Admin');
 
-adminRouter.get('', (req: any, res: any) => {
+adminRouter.get('', (req, res) => {
     
     AdminModel.find()
-            .then((admins: any) => {
+            .then((admins) => {
                 res.status(200).json(admins);
             })
-            .catch((error: any) => {
+            .catch((error) => {
                 res.status(500).json({error: error});
             })
 
 })
 
-adminRouter.post('/register', async (req: any, res: any) => {
+adminRouter.post('/register', async (req, res) => {
 
     const {email, password} = req.body;
 
@@ -54,12 +54,12 @@ adminRouter.post('/register', async (req: any, res: any) => {
         await AdminModel.create(admin);
         res.status(201).json({message: 'Admin created on database!'})
     }
-    catch(error: any) {
+    catch(error) {
         res.status(500).json({error: error});
     }
 });
 
-adminRouter.post('/login', async (req: any, res: any) => {
+adminRouter.post('/login', async (req, res) => {
 
     const {email, password} = req.body;
 
@@ -94,15 +94,15 @@ adminRouter.post('/login', async (req: any, res: any) => {
     }
 });
 
-function isValidEmail(email:string) {
+function isValidEmail(email) {
     return true;
 }
 
-function isValidPassword(password:string) {
+function isValidPassword(password) {
     return password.length > 8;
 }
 
-adminRouter.patch('/admin/:id', async (req: any, res: any) => {
+adminRouter.patch('/admin/:id', async (req, res) => {
 
     const id = req.params.id;
     const {email, password} = req.body;
@@ -117,12 +117,12 @@ adminRouter.patch('/admin/:id', async (req: any, res: any) => {
         await AdminModel.updateOne({_id: id}, admin);
         res.status(201).json({message: 'Admin updated on database!'})
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({error: error});
     }
 });
 
-adminRouter.delete('/admin/:id', async (req: any, res: any) => {
+adminRouter.delete('/admin/:id', async (req, res) => {
 
     const id = req.params.id;
 
@@ -130,7 +130,7 @@ adminRouter.delete('/admin/:id', async (req: any, res: any) => {
         await AdminModel.deleteOne({_id: id});
         res.status(201).json({message: 'Admin deleted on database!'})
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({error: error});
     }
 });

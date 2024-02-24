@@ -5,31 +5,31 @@ const productRouter = express.Router();
 
 const ProductModel = require('../models/Product');
 
-productRouter.get('', (req: any, res: any) => {
+productRouter.get('', (req, res) => {
     
         ProductModel.find()
-            .then((products: any) => {
+            .then((products) => {
                 res.status(200).json(products);
             })
-            .catch((error: any) => {
+            .catch((error) => {
                 res.status(500).json({error: error});
             })
 });
 
-productRouter.get('/:id', (req: any, res: any) => {
+productRouter.get('/:id', (req, res) => {
     
         const id = req.params.id;
     
         ProductModel.findById(id)
-            .then((product: any) => {
+            .then((product) => {
                 res.status(200).json(product);
             })
-            .catch((error: any) => {
+            .catch((error) => {
                 res.status(500).json({error: error});
             })
 });
 
-productRouter.post('', async (req: any, res: any) => {
+productRouter.post('', async (req, res) => {
 
     const {name, qty, price} = req.body;
 
@@ -47,13 +47,13 @@ productRouter.post('', async (req: any, res: any) => {
         await ProductModel.create(product);
         res.status(201).json({message: 'Product created on database!'})
     }
-    catch(error: any) {
+    catch(error) {
         res.status(500).json({error: error});
     }
 
 });
 
-productRouter.patch('/:id', async (req: any, res: any) => {
+productRouter.patch('/:id', async (req, res) => {
 
     const id = req.params.id;
     const {name, qty, price} = req.body;
@@ -70,12 +70,12 @@ productRouter.patch('/:id', async (req: any, res: any) => {
         await ProductModel.updateOne({_id: id}, product);
         res.status(201).json({message: 'Product updated on database!'})
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({error: error});
     }
 });
 
-productRouter.delete('/:id', async (req: any, res: any) => {
+productRouter.delete('/:id', async (req, res) => {
 
     const id = req.params.id;
 
@@ -83,7 +83,7 @@ productRouter.delete('/:id', async (req: any, res: any) => {
         await ProductModel.deleteOne({_id: id});
         res.status(201).json({message: 'Product deleted on database!'})
     }
-    catch (error: any) {
+    catch (error) {
         res.status(500).json({error: error});
     }
 });
