@@ -1,9 +1,7 @@
 var express = require('express');
 const productRouter = express.Router();
-// var category = require('../models/Category'
 
-
-const ProductModel = require('../models/Product');
+// const ProductModel = require('../models/Product');
 
 productRouter.get('', (req, res) => {
     

@@ -1,7 +1,7 @@
 import { Category } from '../models/Category';
 var express = require('express');
 const categoryRouter = express.Router();
-const CategoryModel = require('../models/Category');
+// const CategoryModel = require('../models/Category');
 
 categoryRouter.get('', async (req, res) => {
     
