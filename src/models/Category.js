@@ -1,6 +1,6 @@
 const mongolose = require('mongoose');
 
-export const Category = mongolose.model('Category', {
+const Category = mongolose.model('Category', {
     id: String,
     parent: String,
     name: String,
