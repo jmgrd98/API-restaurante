@@ -2,9 +2,13 @@ var express = require('express');
 const app = express();
 const mongo = require('mongoose');
 const cors = require('cors');
+// import swaggerUi from 'swagger-ui-express';
+// import swaggerDocs from './swagger.json';
+const dotenv = require('dotenv');
+
 app.use(cors());
 
-// dotenv.config();
+dotenv.config();
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 
@@ -24,11 +28,11 @@ app.use('/auth', adminRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
 
 mongo.connect(`mongodb+srv://${dbUser}:${dbPassword}@apicluster0.y7vkluv.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
         console.log('API conectada no MongoDB');
         app.listen(3000);
     })
-    .catch((error: any) => console.error(error))
+    .catch((error) => console.error(error))
