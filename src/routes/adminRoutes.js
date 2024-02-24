@@ -1,7 +1,7 @@
 var express = require('express');
 const adminRouter = express.Router();
 const bcrypt = require('bcrypt');
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
 const AdminModel = require('../models/Admin');
 
