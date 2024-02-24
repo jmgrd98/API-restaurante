@@ -28,7 +28,7 @@ app.use('/auth', adminRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger.json")));
 
 mongo.connect(`mongodb+srv://${dbUser}:${dbPassword}@apicluster0.y7vkluv.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
